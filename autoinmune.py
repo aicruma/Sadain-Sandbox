@@ -15,8 +15,8 @@ from sklearn.svm import SVC
 
 # Cargamos al sistema el conjunto de datos a analalizar
 url = "https://raw.githubusercontent.com/aicruma/Sadain-Sandbox/master/autoinmunes.csv"
-names = ['HLA-B27', 'HLA-DR2', 'HLA-DR7', 'HLA-CW6', 'class']
-dataset = pandas.read_csv(url, names=names)
+nombres = ['HLA-B27', 'HLA-DR2', 'HLA-DR7', 'HLA-CW6', 'Patología']
+dataset = pandas.read_csv(url, names=nombres)
 
 # shape
 print(dataset.shape)
@@ -28,7 +28,7 @@ print(dataset.head(20))
 print(dataset.describe())
 
 # class distribution
-print(dataset.groupby('class').size())
+print(dataset.groupby('Patología').size())
 
 # diagrama de cajas
 dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
@@ -75,12 +75,12 @@ for name, model in models:
 	print(msg)
 
 # Compara los algoritmos
-"""fig = plt.figure()
+fig = plt.figure()
 fig.suptitle('Algorithm Comparison')
 ax = fig.add_subplot(111)
 plt.boxplot(results)
 ax.set_xticklabels(names)
-plt.show()"""
+plt.show()
 
 # Hacer predicciones sobre el conjunto de datos de validación.
 knn = KNeighborsClassifier()
