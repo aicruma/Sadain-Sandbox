@@ -14,7 +14,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 # Cargamos al sistema el conjunto de datos a analalizar
-url = "https://www.dropbox.com/s/7jfblmf381o40hh/autoinmunes.csv"
+url = "https://raw.githubusercontent.com/aicruma/Sadain-Sandbox/master/autoinmunes.csv"
 names = ['HLA-B27', 'HLA-DR2', 'HLA-DR7', 'HLA-CW6', 'class']
 dataset = pandas.read_csv(url, names=names)
 
