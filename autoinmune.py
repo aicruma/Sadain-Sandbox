@@ -30,7 +30,7 @@ print(dataset.describe())
 # class distribution
 print(dataset.groupby('class').size())
 
-"""# diagrama de cajas
+# diagrama de cajas
 dataset.plot(kind='box', subplots=True, layout=(2,2), sharex=False, sharey=False)
 plt.show()
 
@@ -40,7 +40,7 @@ plt.show()
 
 # gráfica de la matriz dispersión
 scatter_matrix(dataset)
-plt.show()"""
+plt.show()
 
 # validación del conjunto de datos
 array = dataset.values
