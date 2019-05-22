@@ -34,6 +34,47 @@ class DiagnosticoAutoInm(KnowledgeEngine):
     def preocupacion(self):
         self.declare(Fact(preocupante=True))
 
+    ##Se define las reglas de marcador genetico para el pacinete
+    @Rule(Fact(preocupante=True),
+          paciente(HLA=MATCH.HLA))
+    def lupus(self, HLA):
+        lupus = ["HLA1", "HLA2", "IRF5", "PTPN22", "STAT4", "CDKN1A", "ITGAM", "BLK", "TNFSF4", "BANK1"]
+        if HLA in lupus:
+            self.declare(Fact(lupus_risk=True))
+            print("¡Advertencia! Riesgo de lupus")
+        else:
+            self.declare(Fact(lupus_risk=False))
+
+    @Rule(Fact(preocupante=True),
+          paciente(HLA=MATCH.HLA))
+    def reumatismo(self, HLA):
+        reumatismo = ["HLA-DR4","HLA-DRB1", "CD28", "CD40"]
+        if HLA in reumatismo:
+            self.declare(Fact(reumatismo_risk=True))
+            print("¡Advertencia! Riesgo de Reumatismo")
+        else:
+            self.declare(Fact(reumatismo_risk=False))
+
+    @Rule(Fact(preocupante=True),
+          paciente(HLA=MATCH.HLA))
+    def espondilitis(self, HLA):
+        espondilitis = ["HLA-b27"]
+        if HLA in espondilitis:
+            print("¡Advertencia! Riesgo de Espondilitis Anquilosante")
+            self.declare(Fact(espondilitis_risk=True))
+        else:
+            self.declare(Fact(espondilitis_risk=False))
+
+    @Rule(Fact(preocupante=True),
+          paciente(HLA=MATCH.HLA))
+    def psoriasis(self, HLA):
+        psoriasis = ["PSORS1","HLA-C", "HLA-Cw6", "CCHCR1","CDSN"]
+        if HLA in psoriasis:
+            print("¡Advertencia! Riesgo de Psoriasis")
+            self.declare(Fact(psoriasis_risk=True))
+        else:
+            self.declare(Fact(psoriasis_risk=False))
+
     ##Se define la lista de sintomas indicativos de bajo riesgo
     @Rule(Fact(preocupante=True),
           AS.p << paciente(),
@@ -55,21 +96,21 @@ class DiagnosticoAutoInm(KnowledgeEngine):
           Fact(tiene_sintomas_autoinmunes=True))
     def protocole_risk_low(self):
         print("El paciente puede presentar una enfermedad autoinmune")
-        print(test)
+
 
     @Rule(Fact(preocupante=True),
         Fact(espondilitis_risk=True),
         Fact(tiene_sintomas_autoinmunes=True))
     def protocole_risk_low(self):
         print("El paciente puede presentar una enfermedad autoinmune")
-        print(test)
+
 
     @Rule(Fact(preocupante=True),
         Fact(reumatismo_risk=True),
         Fact(tiene_sintomas_autoinmunes=True))
     def protocole_risk_low(self):
         print("El paciente puede presentar una enfermedad autoinmune")
-        print(test)
+
 
     @Rule(Fact(preocupante=True),
         Fact(lupus_risk=True),
@@ -123,47 +164,8 @@ class DiagnosticoAutoInm(KnowledgeEngine):
           paciente(tiene_sintomas_autoinmunes=True))
     def tiene_antecedentes_familiares(self):
         self.declare(Fact(tiene_antecedentes_familiares=True))
-        print(test)
+        
 
-    @Rule(Fact(preocupante=True),
-          paciente(HLA=MATCH.HLA))
-    def lupus(self, HLA):
-        lupus = ["HLA1", "HLA2", "IRF5", "PTPN22", "STAT4", "CDKN1A", "ITGAM", "BLK", "TNFSF4", "BANK1"]
-        if HLA in lupus:
-            self.declare(Fact(lupus_risk=True))
-            print("¡Advertencia! Riesgo de lupus")
-        else:
-            self.declare(Fact(lupus_risk=False))
-
-    @Rule(Fact(preocupante=True),
-          paciente(HLA=MATCH.HLA))
-    def reumatismo(self, HLA):
-        reumatismo = ["HLA-DR4","HLA-DRB1", "CD28", "CD40"]
-        if HLA in reumatismo:
-            self.declare(Fact(reumatismo_risk=True))
-            print("¡Advertencia! Riesgo de Reumatismo")
-        else:
-            self.declare(Fact(reumatismo_risk=False))
-
-    @Rule(Fact(preocupante=True),
-          paciente(HLA=MATCH.HLA))
-    def espondilitis(self, HLA):
-        espondilitis = ["HLA-b27"]
-        if HLA in espondilitis:
-            print("¡Advertencia! Riesgo de Espondilitis Anquilosante")
-            self.declare(Fact(espondilitis_risk=True))
-        else:
-            self.declare(Fact(espondilitis_risk=False))
-
-    @Rule(Fact(preocupante=True),
-          paciente(HLA=MATCH.HLA))
-    def psoriasis(self, HLA):
-        psoriasis = ["PSORS1","HLA-C", "HLA-Cw6", "CCHCR1","CDSN"]
-        if HLA in psoriasis:
-            print("¡Advertencia! Riesgo de Psoriasis")
-            self.declare(Fact(psoriasis_risk=True))
-        else:
-            self.declare(Fact(psoriasis_risk=False))
 
 
 #Se instancia el motor
