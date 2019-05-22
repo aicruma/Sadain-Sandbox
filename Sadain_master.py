@@ -16,6 +16,9 @@ Sistema experto que ayuda al diagnostico de enfermedades autoinmunes como:
 4 - Psoriasis.
 
 """
+
+##Para que este proyecto se ejecute adecuadamente se ha de instalar la libreria pyknow
+
 ##Importamos la libreria pyknow - https://pyknow.readthedocs.io/en/stable/index.html
 from pyknow import *
 
@@ -164,7 +167,7 @@ class DiagnosticoAutoInm(KnowledgeEngine):
           paciente(tiene_sintomas_autoinmunes=True))
     def tiene_antecedentes_familiares(self):
         self.declare(Fact(tiene_antecedentes_familiares=True))
-        
+
 
 
 
