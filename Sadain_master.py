@@ -1,10 +1,5 @@
 ##Descripcion del programa
 """
-Desarrollado por Luis Andrés Murcia
-UNAD - CEAD Bogotá JAG - Mayo 2019
-"""
-
-"""
 Sistema experto que ayuda al diagnostico de enfermedades autoinmunes como:
 
 1 - Lupus Eritematoso Sistémico.
